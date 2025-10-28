@@ -1,0 +1,50 @@
+# pyproject.toml
+
+[tool.semantic_release]
+# 1. 버전 관리 대상 파일
+version_source = "tag" #버전 소스를 'tag'로 설정하여 Git 태그를 기준으로 버전을 결정
+tag_commit = true # 새 릴리스 시 Git 태그를 생성합니다.
+hvcs = "github" # 사용할 호스팅 서비스를 지정합니다.
+commit_parser = "conventional" # 커밋 메시지 파서를 Conventional Commits 규격으로 설정
+
+upload_to_release = true # GitHub에 릴리스를 생성합니다.
+
+# 빌드 명령어
+#build_command = """
+#pyinstaller --onefile --windowed --clean \
+#  --name YouTubeDownloader \
+#  --add-binary ffmpeg/ffmpeg.exe;ffmpeg \
+#  main.py
+
+#"""
+
+upload_to_pypi = false
+
+[tool.semantic_release.branches.main]
+match = "master"
+prerelease_token = "rc"
+prerelease = false
+
+[tool.semantic_release.branches.alpha]
+# Matches branches with the prefixes 'feat/', 'fix/', or 'perf/'.
+match = "^(feat|fix|perf)/.+"
+prerelease = true
+prerelease_token = "alpha"
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md" # 변경 이력(changelog)을 생성할 파일 이름을 지정
+include_release_notes = true # 릴리스 노트를 changelog 파일에 추가할지 여부
+mode = "update"
+# mode = "update"
+
+#[tool.semantic_release.publish]
+#dist_glob_patterns = ["dist/*"]
+#upload_to_vcs_release = true
+
+
+#build_command = """
+#pyinstaller --onefile --windowed --clean --add-binary "ffmpeg/ffmpeg.exe;ffmpeg" --name "YouTubeDownloader" main.py
+#"""
+
+#version_toml = "pyproject.toml:tool.poetry.version" #버전 태그를 기반으로 pyproject.toml 파일을 자동으로 업데이트
+#commit_version_number = true # 버전이 업데이트된 커밋을 생성합니다 (version_source가 'tag'일 때 필요).
