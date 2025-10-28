@@ -1,0 +1,35 @@
+name: Build and Release YouTube Downloader
+
+on:
+  push:
+    branches:
+      - master
+
+# default: least privileged permissions across all jobs
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  # build exe in window
+  release:
+    runs-on: windows-latest
+
+    permissions:
+      contents: write
+
+    # 같은 브렌치에서 동시에 여러개의 워크플로우가 실행되지 않도록 방지
+    concurrency:
+      group: ${{ github.workflow }}-release-${{ github.ref_name }}
+      cancel-in-progress: false
+    steps:
+      - name: Setup | Checkout Repository on Release Branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: release test
+        shell: powershell
+        run: |
+          Write-Host "=== release test ==="
