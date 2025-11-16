@@ -25,3 +25,6 @@ Thumbs.db
 
 # ffmpeg
 ffmpeg/ffmpeg.exe
+
+# ignore
+tmp/
