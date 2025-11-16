@@ -26,8 +26,8 @@ prerelease_token = "rc"
 prerelease = false
 
 [tool.semantic_release.branches.alpha]
-# Matches branches with the prefixes 'feat/', 'fix/', or 'perf/'.
-match = "^(feat|fix|perf)/.+"
+# Matches branches with the prefixes 'fix/', or 'perf/'.
+match = "^(fix|perf)/.+"
 prerelease = true
 prerelease_token = "alpha"
 
